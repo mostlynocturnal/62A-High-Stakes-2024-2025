@@ -27,7 +27,8 @@ void on_center_button() {
  * to keep execution time for this mode under a few seconds.
  */
 void initialize() {
-	chassis.calibrate(false);
+	colorSensor.set_led_pwm(100);
+	chassis.calibrate(true);
 }
 
 /**
@@ -74,11 +75,25 @@ void autonomous() {}
  * operator control task will be stopped. Re-enabling the robot will restart the
  * task, not resume it from where it left off.
  */
+void testColor() {
+	float hue = colorSensor.get_hue();
+    float saturation = colorSensor.get_saturation();
+	float brightness = colorSensor.get_brightness();
+	printf("Hue: %.2f, Saturation: %.2f, Brightness: %.2f\n", hue, saturation, brightness);
+	pros::delay(100);
+}
+
+void testFilter() {
+	// int hue = intakeInstance.filterHue(intakeInstance.redLower, intake);
+	// printf("Filter: %i ", hue);
+	pros::delay(100);
+
+}
 
 void opcontrol() {
 	while (true) {
 		driveControl();
-		intakeControl();
+		pros::Task intakeController(intakeControl);
 		mogoControl();
 		liftControl();
 		pros::delay(20);                               // Run for 20 ms then update

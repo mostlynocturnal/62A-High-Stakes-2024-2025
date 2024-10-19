@@ -2,6 +2,8 @@
 #include "subsystems/systemconfig.hpp"
 #include "api.h"
 #include "config.h"
+#include "main.h"
+#include "pros/misc.h"
 
 void driveControl() {
     chassis.tank(master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y), master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_Y));
@@ -14,10 +16,9 @@ void intakeControl() {
     else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
         intakeInstance.out();
     }
-    // else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
-    //     intakeInstance.redirect(750);
-
-    // }
+    else if (master.get_digital(pros::E_CONTROLLER_DIGITAL_RIGHT)) {
+        intakeInstance.redirect(500);
+    }
     else {
         intakeInstance.stop();
     }

@@ -6,7 +6,7 @@
 #include "pros/misc.h"
 #include "subsystems/classes.hpp"
 
-inline pros::Controller master();
+inline pros::Controller master(pros::E_CONTROLLER_MASTER);
 extern pros::MotorGroup left_motors;
 extern pros::MotorGroup right_motors;
 extern pros::Motor intake;
@@ -18,9 +18,16 @@ extern pros::Optical colorSensor;
 
 extern pros::Imu imu;
 
-inline lemlib::PID liftPID(3, 0, 0);
+inline lemlib::PID liftPID(3, 0, 2);
 
-inline Lift liftInstance(lift1, lift2, liftPID, 0, 250, 330, 300, (12.0/60.0));
+inline Lift liftInstance(lift1, lift2, liftPID, 0, 100, 210, 150, (12.0/60.0));
+
+// inline float redlow = 0;
+// inline float redhigh = 30;
+
+
+// inline float bluelow = 180;
+// inline float bluehigh = 210;
 
 inline double trackWidth = 13;
 inline int WheelSize = lemlib::Omniwheel::NEW_325;
@@ -35,7 +42,7 @@ inline lemlib::OdomSensors odom(nullptr,
                                 nullptr, 
                                 &imu);
 
-inline Intake intakeInstance(intake);
+inline Intake intakeInstance(intake, colorSensor);
 
 inline Mogo mogoInstance(mogo);
 
