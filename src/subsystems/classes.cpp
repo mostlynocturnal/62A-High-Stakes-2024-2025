@@ -1,12 +1,13 @@
 #include "subsystems/classes.hpp"
+#include "config.h"
 
 Intake::Intake(pros::Motor& intakeMotor_, pros::Optical& opticalSensor)
     : intakeMotor(intakeMotor_), opticalSensor(opticalSensor) {
-    this->redLower = 0;
-    this->redHigher = 30;
+    this->redLower = redlow;
+    this->redHigher = redhigh;
 
-    this->blueLower = 180;
-    this->blueHigher = 210;
+    this->blueLower = bluelow;
+    this->blueHigher = bluehigh;
     }
 
 void Intake::in() {
@@ -18,13 +19,14 @@ void Intake::out() {
 }
 
 void Intake::redirect(int redirWait) {
-    Intake::in();
-    int hue = filterHue(redLower, redHigher, blueLower, blueHigher);
-    if (hue != 0) {
-        pros::delay(redirWait);
-        Intake::out();
-        pros::delay(500);
-    }
+        Intake::in();
+        int hue = filterHue(redLower, redHigher, blueLower, blueHigher);
+        if (hue != 0) {
+            pros::delay(redirWait);
+            Intake::out();
+            pros::delay(500);
+        }
+        pros::delay(20);
 }
 
 void Intake::stop() {

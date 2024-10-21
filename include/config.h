@@ -22,12 +22,12 @@ inline lemlib::PID liftPID(3, 0, 2);
 
 inline Lift liftInstance(lift1, lift2, liftPID, 0, 100, 210, 150, (12.0/60.0));
 
-// inline float redlow = 0;
-// inline float redhigh = 30;
+inline float redlow = 0;
+inline float redhigh = 30;
 
 
-// inline float bluelow = 180;
-// inline float bluehigh = 210;
+inline float bluelow = 180;
+inline float bluehigh = 210;
 
 inline double trackWidth = 13;
 inline int WheelSize = lemlib::Omniwheel::NEW_325;
